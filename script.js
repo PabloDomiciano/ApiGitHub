@@ -11,20 +11,18 @@ async function consultarRepositorio() {
     return;
   }
 
+  const url = `https://api.github.com/users/${nomeUsuario}/repos`;
+
   await new Promise((resolve) => setTimeout(resolve, 500));
   status.style.display = "inline";
 
-  const url = `https://api.github.com/users/${nomeUsuario}/repos`;
-
   try {
     const resposta = await fetch(url);
-    console.log("antes a promisse");
-    /*resposta.then((res) => {
-      console.log(res);
-    });*/
+    status.style.display = "none";
+
     if (!resposta.ok) {
-      alert("Erro ao realizar a consulta!");
       status.style.display = "none";
+      alert("Erro ao realizar a consulta!");
       return;
     }
 
@@ -36,8 +34,5 @@ async function consultarRepositorio() {
       listaRepositorios.appendChild(itemLista);
     });
     status.style.display = "none";
-
-    console.log("após a promisse");
-  } catch (error) {
-  }
+  } catch (error) {}
 }
